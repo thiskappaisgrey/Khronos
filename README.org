@@ -1,0 +1,19 @@
+#+title: Khronos
+This project an in-progress attempt at a =no_std= language that
+implements [[https://en.wikipedia.org/wiki/Functional_reactive_programming][Functional Reactive Programming]] ideas. The goal of this
+language is to use it to configure my keyboard firmware and my window
+manager implementation(those are a long ways to go). The language
+would also be Emacs inspired, but the syntax is subject to change.
+
+The main idea is to allow the user to define events (based on "core" events) like:
+#+begin_src 
+define_event("double_click", key => pressed(key).take(2).within(2ms)) ;; defines an event - works for any key. This uses FRP abstractions to define
+
+#+end_src
+
+Then define what happens when those events happen (hooks / behaviors) like:
+#+begin_src 
+;; define actions - call backs when an event happens.
+on_event(event("double_click", "n"), insert("hello world")) ;; where insert is an action
+on_event(event("double_click", "k"), switch_layer("layer 2")) ;; where insert is an action
+#+end_src
